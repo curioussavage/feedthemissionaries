@@ -1,0 +1,50 @@
+<head>
+  <title>missionaryfood</title>
+  <meta name='viewport' content="width=device-width, initial-scale=1 maximum-scale=1, user-scalable=no">
+</head>
+
+<body>
+  <header class="app-head">
+    <div class="app-inner-head">
+      <h1 class="app-title">Feed the missionaries!</h1>
+      <div class="login-wrap">
+       {{> loginButtons align="right"}}
+      </div>
+    </div>
+  </header>
+  {{> loggedInMenu}}
+  {{> hello}}
+</body>
+
+<template name="hello">
+  <div class="cal-wrap">
+  {{> ReactiveFullcalendar options  }}
+  </div>
+</template>
+
+<template name="loggedInMenu">
+  {{#if currentUser }}
+  <div class="loggedin-menu">
+    <div class="inner-loggedin">
+      <button class="update-fam-button" id="change-info">Update Family Info</button>
+      {{#if userIsAdmin}}
+        {{> adminToggle }}
+      {{/if}}
+      <p class="fam-name-p"><span style="margin: 0 20px; font-weight: bold;">{{#if isAdminMode}}Admin mode{{/if}}</span>{{profile.famName}} </p>
+    </div>
+  </div>
+  <div class="fam-info-wrap" style="display:none;">
+    <form class="fam-info-form">
+      <!-- <label for="fam-name">family name</label> -->
+      <input class="fam-info-input" type='text' placeholder='family name' id="fam-name" value="{{profile.famName}}" />
+      <input class="fam-info-input" type='text' id="fam-phone"  placeholder='family phone' value="{{profile.phone}}"><br>
+      <button class="submit-fam-info" type="submit" id='submit-fam-info'>submit</button>
+      <button class="submit-fam-info" id='submit-fam-cancel'>cancel</button>
+    </form>
+  </div>
+  {{/if}}
+</template>
+
+<template name="adminToggle">
+ <button class="adminToggle">Toggle Admin</button>
+</template>
