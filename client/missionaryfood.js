@@ -2,15 +2,9 @@ Meteor.subscribe('userData')
 
   Accounts.ui.config({
    passwordSignupFields: 'USERNAME_AND_EMAIL',
-   // extraSignupFields: [{
-   //        fieldName: 'phone',
-   //        fieldLabel: 'phone number',
-   //        inputType: 'text',
-   //        visible: true,
-   //        saveToProfile: true
-   //    }]
   });
   Meteor.subscribe('events');
+
 
   Template.hello.helpers({
       options: function() {
@@ -29,7 +23,7 @@ Meteor.subscribe('userData')
                   var famName = user.profile.famName
 
                   if ( !(start > moment() ) ) {return;}
-                  if (!user) {return}
+                  if (!user || !user.profile.famName) {return}
 
                   var x = Events.find({start: start.format(), end: end.format()}).fetch()
                   if (x.length > 0) {return}
@@ -104,12 +98,10 @@ Template.loggedInMenu.helpers({
 Template.loggedInMenu.events({
   'click #change-info': function(e) {
     e.preventDefault();
-    // $('#change-info').toggle();
     $('.fam-info-wrap').toggle();
   },
   'click #submit-fam-cancel': function(e) {
     e.preventDefault();
-    // $('#change-info').toggle();
     $('.fam-info-wrap').toggle();
 
   },
@@ -127,7 +119,6 @@ Template.loggedInMenu.events({
       $('#fam-name')[0].value = '';
       $('#fam-phone')[0].value = '';
 
-      $('#change-info').toggle();
       $('.fam-info-wrap').toggle();
     })
   }

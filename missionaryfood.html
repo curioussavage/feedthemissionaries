@@ -30,7 +30,14 @@
       {{#if userIsAdmin}}
         {{> adminToggle }}
       {{/if}}
-      <p class="fam-name-p"><span style="margin: 0 20px; font-weight: bold;">{{#if isAdminMode}}Admin mode{{/if}}</span>{{profile.famName}} </p>
+      <p class="fam-name-p">
+        <span style="margin: 0 20px; font-weight: bold;">{{#if isAdminMode}}Admin mode{{/if}}</span>
+      {{#if profile.famName}}
+        Welcome {{profile.famName}}
+      {{else }}
+        <span>You must update family info before scheduling</span>
+      {{/if}}
+      </p>
     </div>
   </div>
   <div class="fam-info-wrap" style="display:none;">
